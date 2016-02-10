@@ -54,7 +54,7 @@ public:
 	/* set the pwm used (by ref)
 	 * ex: control.setPwmUsed(MRio.Pwm.A0)
 	 */
-	void setPwmUsed(Pwm& pwm) { pwmUsed = pwm;}
+	void setPwmUsed(Pwm& pwm) { pwmUsed = pwm; pwmUsed.setFrequency(FREQUENCY_50HZ);}
 	Pwm& getPwmUsed() const { return pwmUsed;}
 	void start() { pwmUsed.enable(); }
 };

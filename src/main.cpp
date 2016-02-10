@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include "MyRioCar.h"
+#include "MyRioHelper.h"
 
 using namespace std;
 
@@ -26,11 +27,13 @@ int main() {
 	finalTime = currentTime + 10;
 	time_t nextInvert = currentTime;
 	using namespace std;
+	DirectionControl dc; dc.setPwmUsed(MRio.Pwm.A2); dc.start();
 	while (currentTime < finalTime) {
 		if (currentTime >= nextInvert) {
 			std::cout << "currnet time: " << currentTime - startTime << "\n";
 			//Car.Control.Speed.setSpeed(a = 1-a);
-			Car.Control.Direction.setAngle(a = -a);
+			//Car.Control.Direction.setAngle(a = -a);
+			dc.setAngle(a=-a);
 			nextInvert = currentTime + 1;
 		}
 		time(&currentTime);
