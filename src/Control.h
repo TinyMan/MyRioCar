@@ -12,7 +12,7 @@
 
 class SpeedControl{
 private:
-	static constexpr float MINDUTYFORWARD = 0.065f;
+	static constexpr float MINDUTYFORWARD = 0.068f;
 	static constexpr float MAXDUTYFORWARD = 0.085f;
 	static constexpr float MINDUTYBACKWARD = 0.040f;
 	static constexpr float MAXDUTYBACKWARD = 0.055f;
@@ -34,12 +34,13 @@ public:
 	/* @return the current "target" speed (in %) */
 	float getSpeed() const { return _speed; }
 	Pwm& getPwmUsed() const { return pwmUsed;}
+	void start() { pwmUsed.enable(); }
 };
 class DirectionControl {
 private:
 	Pwm& pwmUsed;
 	static constexpr float MINDUTY = 0.05f;
-	static constexpr float MAXDUTY = 0.10f;
+	static constexpr float MAXDUTY = 0.1f;
 
 	float angle = 0;
 public:
@@ -55,6 +56,7 @@ public:
 	 */
 	void setPwmUsed(Pwm& pwm) { pwmUsed = pwm;}
 	Pwm& getPwmUsed() const { return pwmUsed;}
+	void start() { pwmUsed.enable(); }
 };
 class Control {
 public:

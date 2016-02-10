@@ -8,6 +8,8 @@
 #include "Control.h"
 #include "MyRioHelper.h"
 #include <string>
+#include <iostream>
+using namespace std;
 
 Control::Control() {
 	// TODO Auto-generated constructor stub
@@ -32,6 +34,7 @@ void SpeedControl::setSpeed(float speed, bool forward) {
 	} else {
 		duty = MAXDUTYBACKWARD - (MAXDUTYBACKWARD - MINDUTYBACKWARD) * speed;
 	}
+	//cout << "setting DUTY for speed " << speed << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }
 
@@ -46,5 +49,6 @@ void DirectionControl::setAngle(float angle) {
 	}
 	this->angle = angle;
 	float duty = MINDUTY + (MAXDUTY - MINDUTY) * ((angle - MINANGLE) / (MAXANGLE - MINANGLE));
+	//cout << "setting DUTY for angle " << angle << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }

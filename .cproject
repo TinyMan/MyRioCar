@@ -12,19 +12,19 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cross.exe.debug.1990068227" name="Debug" parent="cdt.managedbuild.config.gnu.cross.exe.debug">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.cross.exe.debug.1990068227" name="Debug" parent="cdt.managedbuild.config.gnu.cross.exe.debug" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1990068227." name="/" resourcePath="">
-						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.659828673" name="Cross GCC" nonInternalBuilderId="cdt.managedbuild.builder.gnu.cross" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug">
+						<toolChain errorParsers="" id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.659828673" name="Cross GCC" nonInternalBuilderId="cdt.managedbuild.builder.gnu.cross" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug">
 							<option id="cdt.managedbuild.option.gnu.cross.prefix.1415159340" name="Prefix" superClass="cdt.managedbuild.option.gnu.cross.prefix" value="arm-nilrt-linux-gnueabi-" valueType="string"/>
 							<option id="cdt.managedbuild.option.gnu.cross.path.1963367202" name="Path" superClass="cdt.managedbuild.option.gnu.cross.path" value="C:\Program Files (x86)\National Instruments\Eclipse\14.0\arm\sysroots\i686-nilrtsdk-mingw32\usr\bin\armv7a-vfp-neon-nilrt-linux-gnueabi" valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.targetPlatform.gnu.cross.436210429" isAbstract="false" osList="all" superClass="cdt.managedbuild.targetPlatform.gnu.cross"/>
-							<builder autoBuildTarget="all" buildPath="${workspace_loc:/TestCPP}/Debug" cleanBuildTarget="clean" id="org.eclipse.cdt.build.core.internal.builder.597195807" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder">
+							<builder autoBuildTarget="all" buildPath="${workspace_loc:/TestCPP}/Debug" cleanBuildTarget="clean" errorParsers="" id="org.eclipse.cdt.build.core.internal.builder.597195807" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
 								</outputEntries>
 							</builder>
-							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.530460637" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler">
+							<tool command="gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.tool.gnu.cross.c.compiler.530460637" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler">
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.1791069469" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.183636620" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.512299696" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -35,15 +35,17 @@
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.329892958" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/HelperClasses}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/NI Examples}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/source}&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.dialect.std.135910328" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1411648302" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.351192099" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler">
+							<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.351192099" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler">
 								<option id="gnu.cpp.compiler.option.optimization.level.828897836" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.debugging.level.2107426359" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.other.other.315990293" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -mfpu=vfpv3 -mfloat-abi=softfp -Wl,--whole-archive -lpthread -Wl,--no-whole-archive" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.other.other.315990293" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0  -Wl,--whole-archive -lpthread -Wl,--no-whole-archive" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.dialect.std.936582018" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1464966357" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MyRio_1900"/>
@@ -53,21 +55,21 @@
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.426234651" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/HelperClasses}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/NI Examples}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/source}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/HelperClasses}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.646048256" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.1110504621" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.linker.859893334" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker">
+							<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="cdt.managedbuild.tool.gnu.cross.cpp.linker.859893334" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker">
 								<option id="gnu.cpp.link.option.libs.767732970" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="dl"/>
 									<listOptionValue builtIn="false" value="visa"/>
 									<listOptionValue builtIn="false" value="pthread"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1203638260" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/source}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.1416711529" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-static-libstdc++" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1669453213" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -76,22 +78,10 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.99786764" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.152653133" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
+							<tool command="as" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.tool.gnu.cross.assembler.152653133" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.1610695834" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.579891319" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
-						</toolChain>
-					</folderInfo>
-					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1990068227.282317524" name="/" resourcePath="HelperClasses">
-						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.2144762664" name="Cross GCC" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
-							<option id="cdt.managedbuild.option.gnu.cross.prefix.1415159340.1386849557" name="Prefix" superClass="cdt.managedbuild.option.gnu.cross.prefix.1415159340"/>
-							<option id="cdt.managedbuild.option.gnu.cross.path.1963367202.1267389862" name="Path" superClass="cdt.managedbuild.option.gnu.cross.path.1963367202"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.309248967" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler.530460637"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1424896169" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.351192099"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.871773793" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker.1110504621"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.linker.644680113" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker.859893334"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.1598889902" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver.99786764"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.2036190028" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler.152653133"/>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
@@ -125,7 +115,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.126111500" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler">
 								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.option.optimization.level.1147352712" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.1278591637" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.none" valueType="enumerated"/>
-								<option id="gnu.c.compiler.option.include.paths.1012579527" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath"/>
+								<option id="gnu.c.compiler.option.include.paths.1012579527" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/HelperClasses}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/NI Examples}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/source}&quot;"/>
+								</option>
 								<option id="gnu.c.compiler.option.dialect.std.480627741" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1223613387" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MyRio_1900"/>
@@ -135,7 +129,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.849067747" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler">
 								<option id="gnu.cpp.compiler.option.optimization.level.1680126909" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.debugging.level.1713662019" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.include.paths.1752355001" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath"/>
+								<option id="gnu.cpp.compiler.option.include.paths.1752355001" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/HelperClasses}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/NI Examples}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MyRioCar/source}&quot;"/>
+								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1022008964" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MyRio_1900"/>
 								</option>
@@ -179,10 +177,10 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="Release">
+		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/TestCPP"/>
 		</configuration>
-		<configuration configurationName="Debug">
+		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/TestCPP"/>
 		</configuration>
 	</storageModule>
@@ -202,4 +200,5 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
