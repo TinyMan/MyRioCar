@@ -25,16 +25,17 @@ void RemoteControl::serverThread() {
 	std::vector<char> buff(0);
 
 	message_t message;
+	int n = 0;
 	do {
-		recvfrom(_sock, headerBuff.data(), headerBuff.size(), 0,
+		n = recvfrom(_sock, headerBuff.data(), headerBuff.size(), 0,
 				(struct sockaddr*) &remote, &slen);
 
 		message.header =
 				*(reinterpret_cast<remote_message_header*>(headerBuff.data()));
-	} while (message.header.type != MESSAGE_HELLO); // First we wait until a client say HELLO and we store his address in this->remote
+	} while (message.header.type != MESSAGE_HELLO && n > 0); // First we wait until a client say HELLO and we store his address in this->remote
 
 	// then we start looping forever until we got a msg of the server stops
-	int n = 0;
+
 	while ((n = recvfrom(_sock, headerBuff.data(), headerBuff.size(), 0, NULL,
 			NULL)) > 0) {
 		// first receive the header with the type and length of the message
@@ -87,6 +88,7 @@ void RemoteControl::dispatchMessage(message_t message) {
 		remote_command* cmd = reinterpret_cast<remote_command*>(message.message);
 		// set the speed and angle of the car
 		car.Control.Speed.setSpeed(cmd->speed, cmd->forward);
+		car.Control.Direction.setAngle(cmd->angle);
 		break;
 	}
 	default:

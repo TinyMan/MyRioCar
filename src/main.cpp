@@ -3,10 +3,12 @@
 #include "MyRioCar.h"
 #include "MyRioHelper.h"
 #include "AccelerometerHelper.h"
+#include "RemoteControl/RemoteControl.h"
 
 using namespace std;
 
 int main() {
+	try {
 	printf("Testing control\n");
 
 	MyRioCar Car;
@@ -18,7 +20,9 @@ int main() {
 
 	float a = 45;
 	Car.start();
-	Car.Control.Direction.setAngle(45);
+
+	RemoteControl rc(Car);
+	rc.startServer(1337);
 
 	cout << "Power off then power on the speed regulator" << endl;
 	time_t currentTime;
@@ -26,7 +30,7 @@ int main() {
 	time_t startTime;
 	time(&startTime);
 	time(&currentTime);
-	finalTime = currentTime + 10;
+	finalTime = currentTime + 30;
 	time_t nextInvert = currentTime + 1;
 	using namespace std;
 
@@ -43,7 +47,11 @@ int main() {
 		time(&currentTime);
 	}
 
+	rc.stop();
 	cout << "end " << endl;
+	} catch(const char* e){
+		cout << e << endl;
+	}
 	return 0;
 }
 
