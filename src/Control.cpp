@@ -23,6 +23,7 @@ Control::~Control() {
 SpeedControl::SpeedControl() : pwmUsed(MRio.Pwm.A0)
 {
 	pwmUsed.setFrequency(FREQUENCY_50HZ);
+	pwmUsed.setDuty(NEUTRAL_DUTY);
 }
 
 void SpeedControl::setSpeed(float speed, bool forward) {
@@ -30,11 +31,11 @@ void SpeedControl::setSpeed(float speed, bool forward) {
 
 	float duty = 0;
 	if(forward){
-		duty = MINDUTYFORWARD + (MAXDUTYFORWARD - MINDUTYFORWARD) * speed;
+		duty = NEUTRAL_DUTY + (MAXDUTYFORWARD - NEUTRAL_DUTY) * speed;
 	} else {
-		duty = MAXDUTYBACKWARD - (MAXDUTYBACKWARD - MINDUTYBACKWARD) * speed;
+		duty = NEUTRAL_DUTY - (NEUTRAL_DUTY - MINDUTYBACKWARD) * speed;
 	}
-	//cout << "setting DUTY for speed " << speed << ": " << duty << endl;
+	cout << "setting DUTY for speed " << speed << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }
 
