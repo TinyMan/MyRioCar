@@ -9,8 +9,12 @@
 #define MYRIOCAR_H_
 
 #include "Control.h"
+#include "DioHelper.h"
 
 class MyRioCar {
+private:
+	Dio carSwitch;
+
 public:
 	class Control Control;
 

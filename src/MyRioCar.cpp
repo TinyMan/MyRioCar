@@ -7,7 +7,7 @@
 
 #include "MyRioCar.h"
 
-MyRioCar::MyRioCar() {
+MyRioCar::MyRioCar() : carSwitch(Dio::A70, 0) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -17,9 +17,11 @@ MyRioCar::~MyRioCar() {
 }
 
 void MyRioCar::start() {
+	carSwitch.write(true); // switch the car on (we have 3 sec to send neutral pwm to the speed regulator)
 	Control.Direction.start();
 	Control.Speed.start();
 }
 
 void MyRioCar::stop() {
+	carSwitch.write(false);
 }
