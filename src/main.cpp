@@ -8,6 +8,12 @@
 #include <cstdio>
 #include "MyRioCar.h"
 #include "Radar.h"
+#include "AIO.h"
+#include <stdio.h>
+#include <time.h>
+#include "DIO.h"
+#include "MyRio.h"
+
 
 using namespace std;
 
@@ -31,7 +37,7 @@ int main() {
 		sleep(1);
 	}*/
 
-	printf("Testing control\n");
+	printf("Testing control ne surtout pas interrompre\n");
 
 		//MyRioCar Car;
 
@@ -63,8 +69,11 @@ int main() {
 			}
 			time(&currentTime);
 		}*/
+
 	Radar r;
 	r.utiliserRadar();
+
+
 
 	return 0;
 }
