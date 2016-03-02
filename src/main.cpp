@@ -1,4 +1,10 @@
 #include <iostream>
+#include "MyRioHelper.h"
+#include <stdlib.h>
+#include <ctime>
+#include <stdio.h>
+#include "Capteur.h"
+#include <unistd.h>
 #include <cstdio>
 #include "MyRioCar.h"
 #include "MyRioHelper.h"
@@ -27,6 +33,7 @@ int main() {
 		time_t startTime;
 		time(&startTime);
 		time(&currentTime);
+
 		finalTime = currentTime + 60;
 		time_t nextInvert = currentTime + 1;
 
