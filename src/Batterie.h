@@ -9,8 +9,8 @@
 #endif
 #include <stdio.h>
 #include <time.h>
-#include "AIO.h"
-#include "MyRio.h"
+#include <AIO.h>
+#include "MyRioHelper.h"
 
 
 #ifndef BATTERIE_H_

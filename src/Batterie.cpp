@@ -5,7 +5,7 @@
  *      Author: fllor_000
  */
 
-#include <Batterie.h>
+#include "Batterie.h"
 
 Batterie::Batterie() {
 	calculBatterie();
