@@ -25,12 +25,15 @@ Radar::Radar() {
 
 Radar::~Radar() {
 	// TODO Auto-generated destructor stub
+	stop();
+	tid.join();
 }
 
 
-float Radar::utiliserRadar()
+void Radar::utiliserRadar()
 {
-	while(1){
+	int d;
+	while(!_stop){
 		d = c.trouverDistance();
 		dc.setAngle(angle);
 
@@ -47,7 +50,7 @@ float Radar::utiliserRadar()
 			inc = inc * -1;
 		}
 
-		carte[int(dc.MAXANGLE+angle)] = d;
+		carte[angle] = d;
 		//printf("Distance: %f\n", d);
 		if(angle == dc.MINANGLE || angle == dc.MAXANGLE){
 			for(int i=1; i<=2*dc.MAXANGLE; i++){
@@ -56,11 +59,19 @@ float Radar::utiliserRadar()
 			}
 		}
 		angle = angle + inc;
-		sleep(1/90);
 	}
-	return 0;
+
 }
 
-void Radar::getTab(int *tab){
-	tab=carte;
+map<float,uint8_t>& Radar::getTab(){
+	return carte;
+}
+
+void Radar::start() {
+	_stop = false;
+	tid = thread(&Radar::utiliserRadar, this);
+}
+
+void Radar::stop() {
+	_stop=true;
 }

@@ -10,6 +10,7 @@
 #include "MyRioHelper.h"
 #include "AccelerometerHelper.h"
 #include "RemoteControl/RemoteControl.h"
+#include "Radar.h"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ int main() {
 
 		RemoteControl rc(Car);
 		rc.startServer(1337);
+
+		Radar r;
+		r.start();
 
 		time_t currentTime;
 		time_t finalTime;
@@ -46,6 +50,7 @@ int main() {
 			sleep(1);
 		}
 
+		r.stop();
 		rc.stop();
 
 		cout << "end " << endl;

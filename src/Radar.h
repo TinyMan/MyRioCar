@@ -4,31 +4,48 @@
  *  Created on: 16 févr. 2016
  *      Author: fllor_000
  */
-
-#include "Control.h"
-#include "Capteur.h"
-
-
 #ifndef RADAR_H_
 #define RADAR_H_
 
-class Radar{
+#include "Control.h"
+#include "Capteur.h"
+#include "RemoteControl/protocol.h"
+#include <thread>
+#include <map>
+using namespace std;
+
+class Radar {
 public:
 	Radar();
 	virtual ~Radar();
-	float utiliserRadar();
-	void getTab(int *tab);
+	void utiliserRadar();
+	map<float, uint8_t>& getTab();
 
+	void start();
+	void stop();
+
+	us_point getLastPoint() {
+		return {
+			float(angle),
+			carte[angle]
+		};
+	}
+
+	/* set the precision (degree inc) */
+	void setPrecision(int precision = 1) {
+		inc = precision;
+	}
 private:
 	const int VALMIN = 15;
 	const int VALMAX = 100;
 	int angle, inc;
-	float d;
 	Capteur c;
 	DirectionControl dc;
-	int carte[90];
+	map<float, uint8_t> carte;
+
+	thread tid;
+	bool _stop = false;
+
 };
-
-
 
 #endif /* RADAR_H_ */
