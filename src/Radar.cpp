@@ -13,12 +13,14 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <cstdio>
+#include <iostream>
+using namespace std;
 
 
 Radar::Radar() {
 	// TODO Auto-generated constructor stub
 	angle = -44;
-	dc.setPwmUsed(MRio.Pwm.A2); dc.start();
+	dc.setPwmUsed(MRio.Pwm.B1); dc.start();
 	inc = 1;
 	carte[0] = 0;
 }
@@ -34,6 +36,7 @@ void Radar::utiliserRadar()
 {
 	int d;
 	while(!_stop){
+
 		d = c.trouverDistance();
 		dc.setAngle(angle);
 
@@ -51,14 +54,15 @@ void Radar::utiliserRadar()
 		}
 
 		carte[angle] = d;
-		//printf("Distance: %f\n", d);
-		if(angle == dc.MINANGLE || angle == dc.MAXANGLE){
-			for(int i=1; i<=2*dc.MAXANGLE; i++){
+		printf("angle: %d, Distance: %d\n", angle, d);
+		/*if(angle == dc.MINANGLE || angle == dc.MAXANGLE){
+			for(int i=dc.MINANGLE; i<=dc.MAXANGLE; i+=abs(inc)){
 				printf("Val: %i: %i\n", i, carte[i]);
 				//std::cout << "Val: " << i << ": " << carte[i];
 			}
-		}
-		angle = angle + inc;
+		}*/
+		angle += inc;
+		//usleep(70*1000);
 	}
 
 }

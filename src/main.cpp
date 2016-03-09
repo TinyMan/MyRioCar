@@ -24,13 +24,13 @@ int main() {
 		 * Keep the program running for 60 seconds so that the PWM output can be
 		 * observed using an external instrument.
 		 */
-		Car.start();
 
-		RemoteControl rc(Car);
-		rc.startServer(1337);
 
 		Radar r;
 		r.start();
+		RemoteControl rc(Car, r);
+		//rc.startServer(1337);
+		Car.start();
 
 		time_t currentTime;
 		time_t finalTime;
@@ -38,20 +38,27 @@ int main() {
 		time(&startTime);
 		time(&currentTime);
 
-		finalTime = currentTime + 60;
+		finalTime = currentTime + 5;
 		time_t nextInvert = currentTime + 1;
 
+		float a = -45;
+		float b = 0.1;
+		//Car.Control.Direction.setAngle(a);
+		//Car.Control.Speed.setSpeed(b);
 		while (currentTime < finalTime) {
 			if (currentTime >= nextInvert) {
 				//cout << "Main loop running" << endl;
-				nextInvert = currentTime + 10;
+				nextInvert = currentTime + 1;
+				//Car.Control.Direction.setAngle(a=-a);
+				//Car.Control.Speed.setSpeed(b+=0.002);
 			}
 			time(&currentTime);
 			sleep(1);
 		}
 
-		r.stop();
+		//Car.Control.Speed.setSpeed(0);
 		rc.stop();
+		r.stop();
 
 		cout << "end " << endl;
 	} catch (const char* e) {

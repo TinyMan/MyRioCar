@@ -39,7 +39,7 @@ public:
 };
 class DirectionControl {
 private:
-	Pwm& pwmUsed;
+	Pwm pwmUsed;
 	static constexpr float MINDUTY = 0.05f;
 	static constexpr float MAXDUTY = 0.1f;
 
@@ -55,9 +55,10 @@ public:
 	/* set the pwm used (by ref)
 	 * ex: control.setPwmUsed(MRio.Pwm.A0)
 	 */
-	void setPwmUsed(Pwm& pwm) { pwmUsed = pwm; pwmUsed.setFrequency(FREQUENCY_50HZ);}
-	Pwm& getPwmUsed() const { return pwmUsed;}
+	void setPwmUsed(const Pwm& pwm) { pwmUsed = pwm; pwmUsed.setFrequency(FREQUENCY_50HZ);}
+	Pwm getPwmUsed() const { return pwmUsed;}
 	void start() { pwmUsed.enable(); }
+	void stop() { pwmUsed.disable();}
 };
 class Control {
 public:
