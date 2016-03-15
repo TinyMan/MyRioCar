@@ -34,6 +34,7 @@ public:
 	/* set the precision (degree inc) */
 	void setPrecision(int precision = 1) {
 		inc = precision;
+		carte.clear();
 	}
 private:
 	const int VALMIN = 15;

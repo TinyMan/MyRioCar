@@ -28,8 +28,9 @@ int main() {
 
 		Radar r;
 		r.start();
+		r.setPrecision(5);
 		RemoteControl rc(Car, r);
-		//rc.startServer(1337);
+		rc.startServer(1337);
 		Car.start();
 
 		time_t currentTime;
@@ -38,7 +39,7 @@ int main() {
 		time(&startTime);
 		time(&currentTime);
 
-		finalTime = currentTime + 5;
+		finalTime = currentTime + 15;
 		time_t nextInvert = currentTime + 1;
 
 		float a = -45;
@@ -56,7 +57,7 @@ int main() {
 			sleep(1);
 		}
 
-		//Car.Control.Speed.setSpeed(0);
+		Car.Control.Speed.setSpeed(0);
 		rc.stop();
 		r.stop();
 

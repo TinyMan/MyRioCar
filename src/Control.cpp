@@ -45,9 +45,12 @@ DirectionControl::DirectionControl() : pwmUsed(MRio.Pwm.A1)
 }
 
 void DirectionControl::setAngle(float angle) {
-	if(angle < MINANGLE || angle > MAXANGLE) {
-		throw "Angle should be between -45 and 45";
-	}
+	if(angle < MINANGLE) {
+		angle = MINANGLE;
+		//throw "Angle should be between -45 and 45";
+	} else if(angle > MAXANGLE)
+		angle = MAXANGLE;
+
 	this->angle = angle;
 	float duty = MINDUTY + (MAXDUTY - MINDUTY) * ((angle - MINANGLE) / (MAXANGLE - MINANGLE));
 	//cout << "setting DUTY for angle " << angle << ": " << duty << endl;
