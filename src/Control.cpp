@@ -35,7 +35,7 @@ void SpeedControl::setSpeed(float speed, bool forward) {
 	} else {
 		duty = NEUTRAL_DUTY - (NEUTRAL_DUTY - MINDUTYBACKWARD) * speed;
 	}
-	cout << "setting DUTY for speed " << speed << ": " << duty << endl;
+	//cout << "setting DUTY for speed " << speed << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }
 
