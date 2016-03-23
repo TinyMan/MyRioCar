@@ -30,10 +30,12 @@ int main() {
 
 		Radar r;
 		r.start();
+
 		r.setPrecision(1);
 		RemoteControl rc(Car, r);
 		rc.startServer(1337);
 		Car.start();
+		Car.Control.Direction.setAngle(45);
 
 		time_t currentTime;
 		time_t finalTime;
@@ -53,7 +55,7 @@ int main() {
 
 		float angle = 0;
 		float speed = 0.16;
-		//Car.Control.Direction.setAngle(a);
+		Car.Control.Direction.setAngle(angle);
 		//Car.Control.Speed.setSpeed(speed);
 		while (currentTime < finalTime) {
 
@@ -87,6 +89,7 @@ int main() {
 			usleep(1000 * 1000);
 		}
 
+		Car.Control.Direction.setAngle(0);
 		Car.Control.Speed.setSpeed(0);
 		rc.stop();
 		r.stop();

@@ -28,13 +28,15 @@ Radar::Radar() {
 Radar::~Radar() {
 	// TODO Auto-generated destructor stub
 	stop();
-	tid.join();
+	tid->join();
+	delete tid;
 }
 
 
 void Radar::utiliserRadar()
 {
 	int d;
+	dc.setAngle(0);
 	while(!_stop){
 
 		d = c.trouverDistance();
@@ -63,7 +65,7 @@ void Radar::utiliserRadar()
 			}
 		}*/
 		angle += inc;
-		usleep(250*1000);
+		usleep(500*1000);
 	}
 
 }
@@ -74,7 +76,7 @@ map<float,uint8_t>& Radar::getTab(){
 
 void Radar::start() {
 	_stop = false;
-	tid = thread(&Radar::utiliserRadar, this);
+	tid = new thread(&Radar::utiliserRadar, this);
 }
 
 void Radar::stop() {

@@ -38,13 +38,13 @@ public:
 	}
 private:
 	const int VALMIN = 15;
-	const int VALMAX = 100;
+	const int VALMAX = 500;
 	int angle, inc;
 	Capteur c;
 	DirectionControl dc;
 	map<float, uint8_t> carte;
 
-	thread tid;
+	thread* tid = nullptr;
 	bool _stop = false;
 
 };
