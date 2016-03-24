@@ -91,7 +91,7 @@ void RemoteControl::startServer(uint16_t port) {
 	if (bind(_sock, (const struct sockaddr*) &me, sizeof(me)) == -1)
 		throw "bind()";
 
-	//server_thread = new thread(&RemoteControl::serverThread, this);
+	server_thread = new thread(&RemoteControl::serverThread, this);
 }
 
 void RemoteControl::send(const string& message) {

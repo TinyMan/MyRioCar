@@ -14,7 +14,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
 	try {
 		printf("Testing control\n");
 
@@ -26,16 +26,16 @@ int main() {
 		 */
 
 		bool quit = false;
-		const uint8_t MINDISTANCE = 50; // cm
+		const uint8_t MINDISTANCE = 30; // cm
 
 		Radar r;
 		r.start();
 
-		r.setPrecision(1);
+		r.setPrecision(10);
 		RemoteControl rc(Car, r);
 		rc.startServer(1337);
 		Car.start();
-		Car.Control.Direction.setAngle(45);
+
 
 		time_t currentTime;
 		time_t finalTime;
@@ -51,11 +51,13 @@ int main() {
 
 		bool flag =  false;
 		int c = 0;
-		const int nbValMin = 3; // nombre de valeur pour qu'on considere qu'il y a vraiment un obstacle
+		const int nbValMin = 1; // nombre de valeur pour qu'on considere qu'il y a vraiment un obstacle
 
 		float angle = 0;
-		float speed = 0.16;
-		Car.Control.Direction.setAngle(angle);
+		float speed = 0.050;
+		if(argc > 1)
+			speed = atof(argv[1]);
+		//Car.Control.Direction.setAngle(angle);
 		//Car.Control.Speed.setSpeed(speed);
 		while (currentTime < finalTime) {
 
@@ -71,26 +73,26 @@ int main() {
 				++it;
 			}
 
-			cout << c << " ";
+			//cout << c << " ";
 			if(c >= nbValMin){ // there is an obstacle
 				angle = -45;
-				cout << "TURNING" << endl;
+				//cout << "TURNING" << endl;
 			} else {
 				angle = 0;
-				cout << "FORWARD" << endl;
+				//cout << "FORWARD" << endl;
 			}
 
 
 
-			Car.Control.Direction.setAngle(angle);
+			//Car.Control.Direction.setAngle(angle);
 			//Car.Control.Speed.setSpeed(speed);
 
 			time(&currentTime);
-			usleep(1000 * 1000);
+			usleep(1000 * 100);
 		}
 
 		Car.Control.Direction.setAngle(0);
-		Car.Control.Speed.setSpeed(0);
+		//Car.Control.Speed.setSpeed(0);
 		rc.stop();
 		r.stop();
 

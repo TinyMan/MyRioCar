@@ -57,7 +57,7 @@ void Radar::utiliserRadar()
 		}
 
 		carte[angle] = d;
-		printf("angle: %d, Distance: %d\n", angle, d);
+		//printf("angle: %d, Distance: %d\n", angle, d);
 		/*if(angle == dc.MINANGLE || angle == dc.MAXANGLE){
 			for(int i=dc.MINANGLE; i<=dc.MAXANGLE; i+=abs(inc)){
 				printf("Val: %i: %i\n", i, carte[i]);
@@ -65,7 +65,7 @@ void Radar::utiliserRadar()
 			}
 		}*/
 		angle += inc;
-		usleep(500*1000);
+		//usleep(50*1000);
 	}
 
 }

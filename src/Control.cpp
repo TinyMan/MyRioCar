@@ -29,13 +29,14 @@ SpeedControl::SpeedControl() : pwmUsed(MRio.Pwm.A0)
 void SpeedControl::setSpeed(float speed, bool forward) {
 	if(speed < 0 || speed > 1)  throw "Speed should be between 0 and 1";
 
+	speed = 0.173 + speed * (0.05);
 	float duty = 0;
 	if(forward){
 		duty = NEUTRAL_DUTY + (MAXDUTYFORWARD - NEUTRAL_DUTY) * speed;
 	} else {
 		duty = NEUTRAL_DUTY - (NEUTRAL_DUTY - MINDUTYBACKWARD) * speed;
 	}
-	//cout << "setting DUTY for speed " << speed << ": " << duty << endl;
+	cout << "setting DUTY for speed " << speed << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }
 
