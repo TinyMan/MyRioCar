@@ -37,7 +37,7 @@ typedef struct {
 } us_point;
 typedef struct {
 	uint16_t npoints; /* number of us_point detected */
-	us_point * points; /* filled with us_point structures when decoding the network buffer */
+	//us_point * points; /* filled with us_point structures when decoding the network buffer */
 } us_state;
 
 typedef struct{

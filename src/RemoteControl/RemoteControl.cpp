@@ -38,13 +38,13 @@ void RemoteControl::serverThread() {
 						*(reinterpret_cast<remote_message_header*>(buff.data()));
 				cout << "Message comming : " << message.header.type << endl;
 			}
-		} while (message.header.type != MESSAGE_HELLO && n > 0); // First we wait until a client say HELLO and we store his address in this->remote
+		} while (false && message.header.type != MESSAGE_HELLO && n > 0); // First we wait until a client say HELLO and we store his address in this->remote
 
-		if (n > 0){
+		if (n > 0) {
 			cout << "Hello message arrived" << endl;
 			connected = true;
 
-			state_thread= new thread(&RemoteControl::stateThread, this);
+			state_thread = new thread(&RemoteControl::stateThread, this);
 		}
 
 		// then we start looping forever until we got a msg of the server stops
@@ -72,8 +72,10 @@ void RemoteControl::serverThread() {
 
 RemoteControl::~RemoteControl() {
 	stop();
-	if(server_thread)server_thread->join();
-	if(state_thread)state_thread->join();
+	if (server_thread)
+		server_thread->join();
+	if (state_thread)
+		state_thread->join();
 	close(_sock);
 	delete server_thread;
 	delete state_thread;
@@ -94,11 +96,11 @@ void RemoteControl::startServer(uint16_t port) {
 	server_thread = new thread(&RemoteControl::serverThread, this);
 }
 
-void RemoteControl::send(const string& message) {
+void RemoteControl::send(const void* message, size_t len) {
 	//cout << "Sending: " << message<< endl;
 	if (connected) {
-		if (sendto(_sock, message.c_str(), message.length(), 0,
-				(const sockaddr*) &remote, sizeof(remote)) == -1)
+		if (sendto(_sock, message, len, 0, (const sockaddr*) &remote,
+				sizeof(remote)) == -1)
 			throw "Error sendto()";
 	}
 }
@@ -122,14 +124,19 @@ void RemoteControl::dispatchMessage(message_t message) {
 }
 
 void RemoteControl::stateThread() {
-	while((connected)&& !_quit){
+	while ((connected) && !_quit) {
 
 		cout << "Remote control state thread" << endl;
-		if(sendEachPoint){
-			sendUSDPoint(radar.getLastPoint());
+		if (sendEachPoint) {
+			auto tab = radar.getTab();
+			for (auto it : tab) {
+				sendUSDPoint((us_point ) { it.first, it.second });
+			}
 		}
-		usleep(usleep_time);
+
 	}
+	usleep(usleep_time);
+
 }
 
 void RemoteControl::sendUSDPoint(const us_point& point) {
@@ -144,16 +151,22 @@ void RemoteControl::sendUSDPoint(const us_point& point) {
 	remote_state msg;
 	msg.us_detection = uss;
 
-	buff.insert(buff.end(), (const char*)&header, (const char*)&header + sizeof(header));
-	buff.insert(buff.end(), (const char*)&msg, (const char*)&msg + sizeof(msg));
-	buff.insert(buff.end(), (const char*)&point, (const char*)&point + sizeof(point));
+	buff.reserve(sizeof(header) + sizeof(msg) + sizeof(point));
 
-	/*cout << *((int*)buff.data() )<< endl;
-	cout << *((uint16_t*)(buff.data()+sizeof(header)) )<< endl;*/
-	send(buff.data());
+	buff.insert(buff.begin(), (const char*) &header,
+			(const char*) &header + sizeof(header));
+	buff.insert(buff.begin() + sizeof(header), (const char*) &msg,
+			(const char*) &msg + sizeof(msg));
+	buff.insert(buff.begin() + sizeof(header) + sizeof(msg),
+			(const char*) &point, (const char*) &point + sizeof(point));
+	/*
+	 for (auto it = buff.begin(); it != buff.end(); ++it) {
+	 printf("%x ", *it);
+	 }*/
+	send(buff.data(), sizeof(header) + sizeof(msg) + sizeof(point));
 }
 
 void RemoteControl::stop() {
-	_quit  =  true;
+	_quit = true;
 	shutdown(_sock, SHUT_RDWR); // the server thread will end this way (recvfrom will be unblocked and return 0)
 }

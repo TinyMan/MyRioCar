@@ -27,7 +27,7 @@ public:
 	us_point getLastPoint() {
 		return {
 			float(angle),
-			carte[angle]
+			d
 		};
 	}
 
@@ -46,7 +46,7 @@ private:
 
 	thread* tid = nullptr;
 	bool _stop = false;
-
+	uint8_t d;
 };
 
 #endif /* RADAR_H_ */

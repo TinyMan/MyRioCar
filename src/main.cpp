@@ -12,6 +12,8 @@
 #include "RemoteControl/RemoteControl.h"
 #include "Radar.h"
 
+
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -26,7 +28,8 @@ int main(int argc, char* argv[]) {
 		 */
 
 		bool quit = false;
-		const uint8_t MINDISTANCE = 30; // cm
+		const uint8_t MINDISTANCE = 50; // cm
+		const uint8_t STOP = 20;
 
 		Radar r;
 		r.start();
@@ -43,23 +46,25 @@ int main(int argc, char* argv[]) {
 		time(&startTime);
 		time(&currentTime);
 
-		finalTime = currentTime + 20;
+		finalTime = currentTime + 150;
 
 
 		map <float, uint8_t>& arr = r.getTab();
 		auto it = arr.begin();
 
 		bool flag =  false;
+		bool stop = false;
 		int c = 0;
 		const int nbValMin = 1; // nombre de valeur pour qu'on considere qu'il y a vraiment un obstacle
 
 		float angle = 0;
-		float speed = 0.050;
+		float speed = 0.0;
 		if(argc > 1)
 			speed = atof(argv[1]);
+		//sleep(1);
 		//Car.Control.Direction.setAngle(angle);
 		//Car.Control.Speed.setSpeed(speed);
-		while (currentTime < finalTime) {
+		while (currentTime < finalTime && !stop) {
 
 			it = arr.begin();
 			flag = false;
@@ -67,14 +72,22 @@ int main(int argc, char* argv[]) {
 
 
 			// check if there is an obstacle in front of the car
-			while (c <= nbValMin && it != arr.end()){
+			/*while (c <= nbValMin && it != arr.end()){
 				flag = it->second < MINDISTANCE;
+				stop = it->second < STOP;
 				if(flag)c++;
 				++it;
-			}
+			}*/
+			uint8_t distance = r.getLastPoint().distance;
+			stop = distance < STOP;
+
+			//printf( "distance : %d \n" ,  distance );
+
+			speed = distance / 10000.;
+			speed = speed >= 0.01 ? speed : 0;
 
 			//cout << c << " ";
-			if(c >= nbValMin){ // there is an obstacle
+			if(distance < MINDISTANCE){ // there is an obstacle
 				angle = -45;
 				//cout << "TURNING" << endl;
 			} else {
@@ -85,14 +98,15 @@ int main(int argc, char* argv[]) {
 
 
 			//Car.Control.Direction.setAngle(angle);
+			//cout << "Speed " << speed << endl;
 			//Car.Control.Speed.setSpeed(speed);
 
 			time(&currentTime);
-			usleep(1000 * 100);
+			usleep(1000 * 100*10); // 10MS
 		}
 
 		Car.Control.Direction.setAngle(0);
-		//Car.Control.Speed.setSpeed(0);
+		Car.Control.Speed.setSpeed(0);
 		rc.stop();
 		r.stop();
 

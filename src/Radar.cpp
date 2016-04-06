@@ -35,7 +35,7 @@ Radar::~Radar() {
 
 void Radar::utiliserRadar()
 {
-	int d;
+	angle = 0;
 	dc.setAngle(0);
 	while(!_stop){
 
@@ -43,9 +43,9 @@ void Radar::utiliserRadar()
 		dc.setAngle(angle);
 
 		if (d<VALMIN){
-			//d = 0;
-			if(inc>0) d = carte[int(dc.MAXANGLE+angle)-inc];
-			else d = carte[int(dc.MAXANGLE+angle)+inc];
+			d = 0;
+			/*if(inc>0) d = carte[int(dc.MAXANGLE+angle)-inc];
+			else d = carte[int(dc.MAXANGLE+angle)+inc];*/
 		}
 
 		else if(d>VALMAX){

@@ -57,7 +57,7 @@ public:
 	virtual ~RemoteControl();
 
 	void startServer(uint16_t port = 1337);
-	void send(const string& message);
+	void send(const void* message, size_t len);
 	void sendUSDPoint(const us_point& point);
 
 	void stop();

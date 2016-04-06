@@ -20,40 +20,48 @@ Control::~Control() {
 	// TODO Auto-generated destructor stub
 }
 
-SpeedControl::SpeedControl() : pwmUsed(MRio.Pwm.A0)
-{
+SpeedControl::SpeedControl() :
+		pwmUsed(MRio.Pwm.A0) {
 	pwmUsed.setFrequency(FREQUENCY_50HZ);
 	pwmUsed.setDuty(NEUTRAL_DUTY);
 }
 
 void SpeedControl::setSpeed(float speed, bool forward) {
-	if(speed < 0 || speed > 1)  throw "Speed should be between 0 and 1";
+	if (speed < 0 || speed > 1)
+		throw  "Speed should be between 0 and 1";
 
-	speed = 0.173 + speed * (0.05);
 	float duty = 0;
-	if(forward){
-		duty = NEUTRAL_DUTY + (MAXDUTYFORWARD - NEUTRAL_DUTY) * speed;
+	if (speed == 0) {
+		duty = NEUTRAL_DUTY;
 	} else {
-		duty = NEUTRAL_DUTY - (NEUTRAL_DUTY - MINDUTYBACKWARD) * speed;
+
+		if (forward) {
+			speed = 0.173 + speed * (0.05);
+			duty = NEUTRAL_DUTY + (MAXDUTYFORWARD - NEUTRAL_DUTY) * speed;
+		} else {
+			duty = NEUTRAL_DUTY - (NEUTRAL_DUTY - MINDUTYBACKWARD) * speed;
+		}
 	}
 	cout << "setting DUTY for speed " << speed << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }
 
-DirectionControl::DirectionControl() : pwmUsed(MRio.Pwm.A1)
-{
+DirectionControl::DirectionControl() :
+		pwmUsed(MRio.Pwm.A1) {
 	pwmUsed.setFrequency(FREQUENCY_50HZ);
 }
 
 void DirectionControl::setAngle(float angle) {
-	if(angle < MINANGLE) {
+	if (angle < MINANGLE) {
 		angle = MINANGLE;
 		//throw "Angle should be between -45 and 45";
-	} else if(angle > MAXANGLE)
+	} else if (angle > MAXANGLE)
 		angle = MAXANGLE;
 
 	this->angle = angle;
-	float duty = MINDUTY + (MAXDUTY - MINDUTY) * ((angle - MINANGLE) / (MAXANGLE - MINANGLE));
-	//cout << "setting DUTY for angle " << angle << ": " << duty << endl;
+	float duty = MINDUTY
+			+ (MAXDUTY - MINDUTY)
+					* ((angle - MINANGLE) / (MAXANGLE - MINANGLE));
+//cout << "setting DUTY for angle " << angle << ": " << duty << endl;
 	pwmUsed.setDuty(duty);
 }
